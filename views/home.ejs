@@ -1,7 +1,14 @@
 <%- include("public/header.ejs")%> 
-<h1>
-    Hello! This is homepage.
-</h1>
+
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Hello! This is homepage.</h1>
+            <p>
+                <a class="btn btn-primary btn-large" href="/article/add">Add new!</a>
+            </p>
+        </div>
+    </header>
+
 
 
 <% Articles.forEach(Article => { %> 
