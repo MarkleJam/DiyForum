@@ -1,0 +1,20 @@
+<%- include("../public/header.ejs") %> 
+
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">Add comment to <%= Article.title %> </h1> 
+            <form action='/article/<%= Article._id %>/comment' method='POST'>
+                <div class="form-group">
+                    <input class='form-control' name='CommentAuthor' type='text' placeholder="Author">
+                </div>
+                <div class="form-group">
+                    <input class='form-control' name='CommentCont' type='text' placeholder="Content">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-default">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<%- include("../public/foot.ejs") %> 
