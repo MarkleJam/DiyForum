@@ -1,9 +1,42 @@
 <%- include("public/header.ejs") %> 
-<div class='thumbnail'>
-    <img class='img-responsive' src='<%= Article.img %> '>
-    <div class='caption-full'>
-        <h4><%= Article.title %> </h4>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">HOLE</p>
+            <div class="list-group">
+                <li calss="list-group-item">Info1</li>
+                <li calss="list-group-item active">Info2</li>
+                <li calss="list-group-item">Info3</li>
+            </div>
+        </div>
+        <div class='col-md-9'>
+            <div class='thumbnail'>
+                <img class='img-responsive' src='<%= Article.img %> '>
+                <div class='caption-full'>
+                    <h4><%= Article.title %> </h4>
+                    <p><%= Article.description %> </p>
+                </div>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a href='/article/<%= Article._id %>/comment/new' class='btn btn-success'>Add new comment</a>
+                </div>
+                <br>
+                 <% Article.comments.forEach(comment => { %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.CommentAuthor %> </strong>
+                            <p>
+                                <%= comment.CommentCont %> 
+                            </p>
+                        </div>
+                    </div>
+                <% }); %> 
+            </div>
+        </div>
+        
     </div>
+    
 </div>
 
 <%- include("public/foot.ejs") %> 
