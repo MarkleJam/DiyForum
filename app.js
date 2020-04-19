@@ -5,6 +5,7 @@ var router = new Router();
 var views = require('koa-views');
 var bodyParser = require('koa-bodyparser');
 var DB = require('./module/db.js');
+var JSON = require('JSON');
 
 const ArticalCollection = 'article';
 const UserCollection = 'article';
@@ -21,8 +22,18 @@ router.get('/', async (ctx) => {
     });
 })
 
+router.get('/article/show', async (ctx)=>{
+    let id = ctx.query.id;
+    console.log('id is:' + id);
+    console.log('id in DB:' + DB.getObjectID(id));
+    
+    let article = await DB.find(ArticalCollection, {'_id':DB.getObjectID(id)});
+    //console.log('article is:' + JSON.stringify(article));
+    await ctx.render('detail',{Article:article[0]});
+})
+
 router.get('/article/add', async (ctx) => {
-    await ctx.render('new');
+    await ctx.render('addArticle');
 })
 
 router.post('/article/doAdd', async (ctx) => {
