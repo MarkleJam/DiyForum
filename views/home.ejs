@@ -2,4 +2,17 @@
 <h1>
     Hello! This is homepage.
 </h1>
+
+
+<% Articles.forEach(Article => { %> 
+    <div class='col-md-3 col-sm-6'>
+        <div class='thumbnail'>
+            <img src="<%= Article.img%>">
+            <div class='caption'>
+                <h4><%= Article.title %></h4>
+            </div>
+        </div>
+    </div>
+<% }); %> 
+
 <%- include("public/foot.ejs")%> 
