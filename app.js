@@ -5,20 +5,37 @@ var router = new Router();
 var views = require('koa-views');
 var bodyParser = require('koa-bodyparser');
 var DB = require('./module/db.js');
-var JSON = require('JSON');
 
 const ArticalCollection = 'article';
 const UserCollection = 'user';
 const CommentCollection = 'comment';
-
 var CommentRoute = require('./routes/comment.js');
 var UserRoute = require('./routes/user.js');
 var ArticleRoute = require('./routes/article.js');
+require('./auth.js')
+
+//Below for authentication
+var  passport = require("koa-passport");
+const session = require('koa-session');
 
 app.use(bodyParser());
 app.use(views('views', {
     extension:'ejs'
 }))
+
+// sessions
+app.keys = ['super-secret-key'];
+app.use(session(app));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(async function(ctx, next){
+
+    ctx.state.user = ctx.req.user;
+    //console.log("Current user is" + ctx.req.user);
+    await next();
+ });
 
 router.get('/', async (ctx) => {
     var articles  = await DB.find(ArticalCollection);
@@ -29,7 +46,7 @@ router.get('/', async (ctx) => {
 
 router.use('/article', ArticleRoute);
 router.use('/article/:id/comment',CommentRoute);
+router.use('/user', UserRoute);
 
 app.use(router.routes());
-
-app.listen(3000);
+app.listen(3001);
