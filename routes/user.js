@@ -20,7 +20,6 @@ router.post('/register', async (ctx) => {
           ctx.body = { success: false }
           ctx.throw(401)
         } else {
-            console.log('In authenticate function, user is:' + user);
             ctx.redirect('/');
             return ctx.login(user)
         }
