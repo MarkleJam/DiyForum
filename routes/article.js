@@ -11,8 +11,6 @@ router.get('/show', async (ctx)=>{
     //console.log('id in DB:' + DB.getObjectID(id));
     
     let article = await DB.find(ArticalCollection, {'_id':DB.getObjectID(id)});
-    //console.log('article is:' + JSON.stringify(article));
-    //console.log('The aritcle is like:' + article[0]);
     
     await ctx.render('detail',{Article:article[0]});
 })
