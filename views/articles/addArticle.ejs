@@ -1,6 +1,6 @@
-<% -include("public/header.ejs") %> 
+<%- include("public/header.ejs") %> 
 <div class="container">
-    <div class="row">
+    <div class="well">
         <h1>Add one new post</h1>
         <form action="/article/doAdd" method="POST">
             <div class="form-group">
@@ -10,6 +10,9 @@
                 <input class='form-control' name='img' type='text' placeholder="URL">
             </div>
             <div class="form-group">
+                <input class='form-control' name='description' type='text' placeholder="DESCRIPTION">
+            </div>
+            <div class="form-group">
                 <button class="btn btn-lg btn-default">Submit</button>
             </div>
         </form>
@@ -17,4 +20,4 @@
 
 </div>
 
-<% -include("public/foot.ejs") %> 
+<%- include("public/foot.ejs") %> 
