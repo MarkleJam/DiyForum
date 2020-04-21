@@ -1,4 +1,4 @@
-<%- include("public/header.ejs") %> 
+<%- include("../public/header.ejs") %> 
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -19,7 +19,7 @@
                     <p>Submitted by <strong><%= Article.author.username %> </strong></p>
                     <% if(user && user._id.equals(Article.author.id)) {%> 
                     <a href='/article/<%= Article._id %>/edit' class='btn btn-success'>Edit</a>
-                    <a href='/article/<%= Article._id %>/delete' class='btn btn-danger'>delete</a>
+                    <a href='/article/<%= Article._id %>/doDelete' class='btn btn-danger'>delete</a>
                     <% } %> 
                 </div>
             </div>
@@ -45,4 +45,4 @@
     
 </div>
 
-<%- include("public/foot.ejs") %> 
+<%- include("../public/foot.ejs") %> 
