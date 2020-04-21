@@ -15,6 +15,12 @@
                 <div class='caption-full'>
                     <h4><%= Article.title %> </h4>
                     <p><%= Article.description %> </p>
+                    <br>
+                    <p>Submitted by <strong><%= Article.author.username %> </strong></p>
+                    <% if(user && user._id.equals(Article.author.id)) {%> 
+                    <a href='/article/<%= Article._id %>/edit' class='btn btn-success'>Edit</a>
+                    <a href='/article/<%= Article._id %>/delete' class='btn btn-danger'>delete</a>
+                    <% } %> 
                 </div>
             </div>
             <div class="well">
