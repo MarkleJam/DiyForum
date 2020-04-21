@@ -12,12 +12,16 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/">Log in</a></li>
-                        <li><a href="/">Sign up</a></li>
-                        <li><a href="/">Log out</a></li>
+                        <% if(!user) {%>
+                        <li><a href="/user/login">Log in</a></li>
+                        <li><a href="/user/register">Sign up</a></li>
+                        <%} else { %> 
+                            <li><a href='#'>Hi, <%= user.username %></a> </li>
+                            <li><a href="/user/logout">Log out</a></li>
+                        <% } %> 
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> 
 
     
