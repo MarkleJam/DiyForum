@@ -1,7 +1,7 @@
 const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require("mongodb").ObjectID;
 const Config = require("./config.js");
-
+const JSON = require("JSON");
 class Db {
 
     static getInstance() {
@@ -44,6 +44,7 @@ class Db {
         return new Promise((resolve, reject)=>{
             var result;
             this.connect().then(function(db) {
+                //console.log('Damn, who is trying to use:' + JSON.stringify(collectionName) + 'to find' + JSON.stringify(json));
                 result = db.collection(collectionName).find(json);
                 result.toArray((err, docs) => {
                     if(err) {
@@ -76,7 +77,7 @@ class Db {
     insert(collectionName, json) {
         return new Promise((resolve, reject)=>{
             this.connect().then((db)=>{
-                console.log("The collection name is:" + collectionName);
+                //console.log("The collection name is:" + collectionName);
                 
                 db.collection(collectionName).insertOne(json, function(err, result){
                     if(err) {
