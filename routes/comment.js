@@ -5,7 +5,7 @@ const UserCollection = 'user';
 const CommentCollection = 'comment';
 const ArticalCollection = 'article';
 
-router.get('/new', async (ctx) => {
+router.get('/new',isLoggedIn, async (ctx) => {
     //console.log(ctx.params.id);
     let article = await DB.find(ArticalCollection, {'_id':DB.getObjectID(ctx.params.id)});
     await ctx.render('comments/new',{Article:article[0]});
@@ -24,5 +24,12 @@ router.post('/', async (ctx)=>{
 
     ctx.redirect('/article/show?id=' + article._id);
 })
+
+function isLoggedIn(ctx, next){
+    if(ctx.isAuthenticated()){
+        return next();
+    }
+    ctx.redirect("/user/login");
+}
 
 module.exports = router.routes();
