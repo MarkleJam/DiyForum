@@ -29,14 +29,20 @@
                 </div>
                 <br>
                  <% Article.comments.forEach(comment => { %>
+                    <% if(typeof(comment) != 'undefined') {%> 
                     <div class="row">
                         <div class="col-md-12">
-                            <strong><%= comment.CommentAuthor %> </strong>
+                            <strong><%= comment.author.username %> </strong>
                             <p>
                                 <%= comment.CommentCont %> 
                             </p>
+                            <% if(user && user._id.equals(comment.author.id)) {%> 
+                                <a href='/article/<%= Article._id %>/comment/<%= comment._id %>/edit' class='btn btn-success'>Edit</a>
+                                <a href='/article/<%= Article._id %>/comment/<%= comment._id %>/doDelete' class='btn btn-danger'>delete</a>
+                            <% } %> 
                         </div>
                     </div>
+                <% } %> 
                 <% }); %> 
             </div>
         </div>

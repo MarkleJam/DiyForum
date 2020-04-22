@@ -3,10 +3,7 @@
     <div class="container">
         <div class="row">
             <h1 style="text-align: center">Add comment to <%= Article.title %> </h1> 
-            <form action='/article/<%= Article._id %>/comment' method='POST'>
-                <div class="form-group">
-                    <input class='form-control' name='CommentAuthor' type='text' placeholder="Author">
-                </div>
+            <form action='/article/<%= Article._id %>/comment/doAdd' method='POST'>
                 <div class="form-group">
                     <input class='form-control' name='CommentCont' type='text' placeholder="Content">
                 </div>
