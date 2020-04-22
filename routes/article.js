@@ -7,9 +7,6 @@ const ArticalCollection = 'article';
 
 router.get('/show', async (ctx)=>{
     let id = ctx.query.id;
-    //console.log('id is:' + id);
-    //console.log('id in DB:' + DB.getObjectID(id));
-    
     let article = await DB.find(ArticalCollection, {'_id':DB.getObjectID(id)});
     
     await ctx.render('articles/detail',{Article:article[0]});
@@ -36,12 +33,11 @@ router.get('/add', isLoggedIn, async (ctx) => {
 })
 
 router.post('/doAdd', async (ctx) => {
-    //console.log('I am trying to post a new article');
+    
     let content = await ctx.request.body;
     let newAuthor = {id: ctx.req.user._id, username:ctx.req.user.username}
     content.comments = [];
     content.author = newAuthor;
-    //console.log("dang!!!!"+content);
     var ret = await DB.insert(ArticalCollection, content);
 
     try {
@@ -57,8 +53,15 @@ router.post('/doAdd', async (ctx) => {
 
 router.get('/:id/doDelete',async (ctx) => {
     let id = ctx.params.id;
-    var result = await DB.delete(ArticalCollection, {'_id':DB.getObjectID(id)});
-    console.log(result);
+    let articles = await DB.find(ArticalCollection, {'_id':DB.getObjectID(id)});
+    let article = articles[0];
+
+    article.comments.map(async (comment)=>{
+        console.log("I am deleting:" + comment._id);        
+        await DB.delete(CommentCollection, {'_id':DB.getObjectID(comment._id)})
+    })
+
+    var result = await DB.delete(ArticalCollection, {'_id':DB.getObjectID(id)});    
     
     try {
         if(result.result.ok) {
