@@ -18,13 +18,13 @@ class Db {
         this.connect();
         console.log("Big Cong! Connected!");
     }
-//Testing Branch!
+
     connect() {
         let _that = this;
         return new Promise(function(resolve, reject) {
             if(!_that.dbClient) {
                 //This solves multi query! We do not need to connect every time
-                MongoClient.connect(Config.dbUrl, { useNewUrlParser: true }, (err, client) => {
+                MongoClient.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, client) => {
 
                     if(err) {
                         reject(err);
