@@ -54,4 +54,4 @@ router.use('/article/:id/comment',CommentRoute);
 router.use('/user', UserRoute);
 
 app.use(router.routes());
-app.listen(3001);
+app.listen(process.env.PORT);
